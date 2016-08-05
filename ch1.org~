@@ -1,0 +1,61 @@
+* Ch1
+** What is functional data
+   #+BEGIN_SRC 
+data(growth)
+hgtm = growth$hgtm
+hgtf = growth$hgtf                       
+age = growth$age
+
+
+knots  <- growth$age
+norder <- 6
+nbasis <- length(knots) + norder - 2
+hgtbasis <- create.bspline.basis(c(1,18), nbasis, norder, knots)
+
+Lfdobj <- 4
+lambda <- 1e-1
+growfdPar <- fdPar(hgtbasis, Lfdobj, lambda)
+
+hgtffd <- smooth.basis(age, hgtf[,1:10], growfdPar)$fd
+
+age<-growth$age
+
+dat<-melt(growth$hgtf[,1:10])
+
+ggplot(data=dat,
+       aes(x=X1,y=value,colour=X2)) +
+    geom_line()+
+    geom_point()
+
+D1hgtffd <- deriv.fd(hgtffd,1)
+D2hgtffd <- deriv.fd(hgtffd,2)
+
+plot(D2hgtffd,ylim=c(-4,2))
+
+      #+END_SRC
+
+- 
+** Functional models for nonfunctional data
+** Some functional data analysis
+** The goal of FDA
+** The first step on a functional data analysis
+*** Smoothing vs Interpolation
+	Interpolation assumes the data observed is errorless.
+	If they have observational error, then the conversion from discrete data to functional may involve smoothing to remove error.
+	
+*** Data registration or feature alignment
+*** Data display
+*** Plotting pairs of derivatives
+** Exploring variability in functional data
+*** Functional descriptive statistics
+*** Functional PCA
+*** Functional canonical correlation
+	A simple canonical correlation: determining the relationship between group of variables in a data set.
+	The data set is split to two groups X and Y, based on some common characteristics.
+
+	Mathematically, max U'X'YV s.t. U'X'XU = I and V'Y'YV=I.
+
+** Functional linear model 
+** Using derivative in FDA
+** Concluding remarks
+  

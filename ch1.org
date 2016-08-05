@@ -1,0 +1,115 @@
+#+TITLE: Functional Data Analysis
+#+AUTHOR: Ian XU Sheng
+#+EMAIL: ian.tsuising@gmail.com
+
+* Ch1
+** What is functional data
+Example for plot
+
+   #+BEGIN_SRC 
+data(growth)
+hgtm = growth$hgtm
+hgtf = growth$hgtf                       
+age = growth$age
+
+
+knots  <- growth$age
+norder <- 6
+nbasis <- length(knots) + norder - 2
+hgtbasis <- create.bspline.basis(c(1,18), nbasis, norder, knots)
+
+Lfdobj <- 4
+lambda <- 1e-1
+growfdPar <- fdPar(hgtbasis, Lfdobj, lambda)
+
+hgtffd <- smooth.basis(age, hgtf[,1:10], growfdPar)$fd
+
+age<-growth$age
+
+dat<-melt(growth$hgtf[,1:10])
+
+ggplot(data=dat,
+       aes(x=X1,y=value,colour=X2)) +
+    geom_line()+
+    geom_point()
+
+D1hgtffd <- deriv.fd(hgtffd,1)
+D2hgtffd <- deriv.fd(hgtffd,2)
+
+plot(D2hgtffd,ylim=c(-4,2))
+
+      #+END_SRC
+*** Growth data
+- Repeat measured
+- Unequally spaced
+- Plot the data vs derivative (first or second order for further analysis)
+
+*** Non durable good index
+- Like a time series, no repeated measure
+- Equally spaced
+- Periodical 
+
+*** Oil refinery
+- repeated measured
+- Equally spaced    
+- Paired 
+
+
+** Functional models for nonfunctional data
+- R, W, R,2002's paper
+- Using logistic model for different term
+- P is a function of \theta
+- For different term, the smoothed functions become functional data 
+
+** Some functional data analysis
+*** Four Locations' Monthly Mean Temperature in Canadian
+- Plot the data for initial guess
+- The curves look like sinusoidal
+- Find a *forcing function* L-temp for testing the sinusoidal
+- Plot the time vs L-temp
+
+*** Gait data
+- Repeated measure
+- Paired
+- Using phase-plant plot to plot the average path vs a path from a particular observation
+   
+** The goal of FDA
+- To represent the data in ways that aid further analysis
+- To display the data so as to highlight various characteristics
+- To Study important sources of pattern and variation among the data
+- To explain variation in an outcome or dependent variable by using input or independent variable information
+  
+
+** The first step on a functional data analysis
+*** Smoothing vs Interpolation
+- Interpolation assumes the data observed is errorless.
+- If they have observational error, then the conversion from discrete data to functional may involve smoothing to remove error.
+	
+*** Data registration or feature alignment
+- e.g. Pinch data
+*** Data display
+- e.g. Gait data
+*** Plotting pairs of derivatives
+- e.g. Canadian temperature data and nondurable good index.
+** Exploring variability in functional data
+*** Functional descriptive statistics
+- Chapter2
+- Chapter7 returns to summary problem, i.e. registration and alignment etc.
+*** Functional PCA
+- Chapter 8, 9, 10
+  
+*** Functional canonical correlation
+- A simple canonical correlation: determining the relationship between group of variables in a data set.
+- The data set is split to two groups X and Y, based on some common characteristics.
+- Mathematically, max U'X'YV s.t. U'X'XU = I and V'Y'YV=I.
+
+** Functional linear model
+- Chapter 12-17 
+** Using derivative in FDA
+- Chapter 18-21
+** Concluding remarks
+
+- SHI Jian qing 2012 doubly miss-specified models
+
+
+  

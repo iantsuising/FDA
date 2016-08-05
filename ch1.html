@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Functional Data Analysis</title>
+<!-- 2016-08-03 Wed 14:50 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Ian XU Sheng" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Functional Data Analysis</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Ch1</a>
+<ul>
+<li><a href="#sec-1-1">1.1. What is functional data</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Growth data</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Non durable good index</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Oil refinery</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Functional models for nonfunctional data</a></li>
+<li><a href="#sec-1-3">1.3. Some functional data analysis</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Four Locations' Monthly Mean Temperature in Canadian</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Gait data</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. The goal of FDA</a></li>
+<li><a href="#sec-1-5">1.5. The first step on a functional data analysis</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. Smoothing vs Interpolation</a></li>
+<li><a href="#sec-1-5-2">1.5.2. Data registration or feature alignment</a></li>
+<li><a href="#sec-1-5-3">1.5.3. Data display</a></li>
+<li><a href="#sec-1-5-4">1.5.4. Plotting pairs of derivatives</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6. Exploring variability in functional data</a>
+<ul>
+<li><a href="#sec-1-6-1">1.6.1. Functional descriptive statistics</a></li>
+<li><a href="#sec-1-6-2">1.6.2. Functional PCA</a></li>
+<li><a href="#sec-1-6-3">1.6.3. Functional canonical correlation</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-7">1.7. Functional linear model</a></li>
+<li><a href="#sec-1-8">1.8. Using derivative in FDA</a></li>
+<li><a href="#sec-1-9">1.9. Concluding remarks</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Ch1</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> What is functional data</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Example for plot
+</p>
+
+<pre class="example">
+data(growth)
+hgtm = growth$hgtm
+hgtf = growth$hgtf                       
+age = growth$age
+
+
+knots  &lt;- growth$age
+norder &lt;- 6
+nbasis &lt;- length(knots) + norder - 2
+hgtbasis &lt;- create.bspline.basis(c(1,18), nbasis, norder, knots)
+
+Lfdobj &lt;- 4
+lambda &lt;- 1e-1
+growfdPar &lt;- fdPar(hgtbasis, Lfdobj, lambda)
+
+hgtffd &lt;- smooth.basis(age, hgtf[,1:10], growfdPar)$fd
+
+age&lt;-growth$age
+
+dat&lt;-melt(growth$hgtf[,1:10])
+
+ggplot(data=dat,
+       aes(x=X1,y=value,colour=X2)) +
+    geom_line()+
+    geom_point()
+
+D1hgtffd &lt;- deriv.fd(hgtffd,1)
+D2hgtffd &lt;- deriv.fd(hgtffd,2)
+
+plot(D2hgtffd,ylim=c(-4,2))
+</pre>
+</div>
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Growth data</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li>Repeat measured
+</li>
+<li>Unequally spaced
+</li>
+<li>Plot the data vs derivative (first or second order for further analysis)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Non durable good index</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<ul class="org-ul">
+<li>Like a time series, no repeated measure
+</li>
+<li>Equally spaced
+</li>
+<li>Periodical 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Oil refinery</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li>repeated measured
+</li>
+<li>Equally spaced    
+</li>
+<li>Paired 
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Functional models for nonfunctional data</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>R, W, R,2002's paper
+</li>
+<li>Using logistic model for different term
+</li>
+<li>P is a function of &theta;
+</li>
+<li>For different term, the smoothed functions become functional data 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Some functional data analysis</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Four Locations' Monthly Mean Temperature in Canadian</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ul class="org-ul">
+<li>Plot the data for initial guess
+</li>
+<li>The curves look like sinusoidal
+</li>
+<li>Find a <b>forcing function</b> L-temp for testing the sinusoidal
+</li>
+<li>Plot the time vs L-temp
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Gait data</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<ul class="org-ul">
+<li>Repeated measure
+</li>
+<li>Paired
+</li>
+<li>Using phase-plant plot to plot the average path vs a path from a particular observation
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> The goal of FDA</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>To represent the data in ways that aid further analysis
+</li>
+<li>To display the data so as to highlight various characteristics
+</li>
+<li>To Study important sources of pattern and variation among the data
+</li>
+<li>To explain variation in an outcome or dependent variable by using input or independent variable information
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> The first step on a functional data analysis</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Smoothing vs Interpolation</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<ul class="org-ul">
+<li>Interpolation assumes the data observed is errorless.
+</li>
+<li>If they have observational error, then the conversion from discrete data to functional may involve smoothing to remove error.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Data registration or feature alignment</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<ul class="org-ul">
+<li>e.g. Pinch data
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> Data display</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<ul class="org-ul">
+<li>e.g. Gait data
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> Plotting pairs of derivatives</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<ul class="org-ul">
+<li>e.g. Canadian temperature data and nondurable good index.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Exploring variability in functional data</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> Functional descriptive statistics</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<ul class="org-ul">
+<li>Chapter2
+</li>
+<li>Chapter7 returns to summary problem, i.e. registration and alignment etc.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> Functional PCA</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<ul class="org-ul">
+<li>Chapter 8, 9, 10
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> Functional canonical correlation</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<ul class="org-ul">
+<li>A simple canonical correlation: determining the relationship between group of variables in a data set.
+</li>
+<li>The data set is split to two groups X and Y, based on some common characteristics.
+</li>
+<li>Mathematically, max U'X'YV s.t. U'X'XU = I and V'Y'YV=I.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Functional linear model</h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>Chapter 12-17 
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Using derivative in FDA</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>Chapter 18-21
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Concluding remarks</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>SHI Jian qing 2012 doubly miss-specified models
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Ian XU Sheng</p>
+<p class="date">Created: 2016-08-03 Wed 14:50</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
