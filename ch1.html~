@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Functional Data Analysis</title>
-<!-- 2016-08-07 Sun 16:11 -->
+<!-- 2016-08-07 Sun 15:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Ian XU Sheng" />
@@ -669,8 +669,10 @@ plot(D2hgtffd,ylim=c(-4,2))
 </li>
 
 <li>Gait data:
-</li>
+<ul class="org-ul">
 <li>sample code:
+</li>
+</ul>
 </li>
 </ul>
 <pre class="example">
@@ -730,77 +732,9 @@ dev.off()
 <p><img src="file:///home/tsui/Documents/FDA/gait.jpeg" alt="gait.jpeg" /> 
 </p>
 </div>
-
-<ul class="org-ul">
-<li>Canadian weather data:
-</li>
-<li>sample code:
-</li>
-</ul>
-<pre class="example">
-daybasis65 &lt;- create.fourier.basis(c(0, 365), nbasis=65)
-#  -----------  set up the harmonic acceleration operator  ----------
-harmaccelLfd365 &lt;- vec2Lfd(c(0,(2*pi/365)^2,0), c(0, 365))
-
-
-
-TempSm6 &lt;- smooth.basisPar(argvals=day.5, y=CanadianWeather$dailyAv[,,1],
-     fdobj=daybasis65, Lfdobj=harmaccelLfd365, lambda=1e6)$fd
-
-PrecipSm6 &lt;- smooth.basisPar(argvals=day.5, y=CanadianWeather$dailyAv[,,3],
-     fdobj=daybasis65, Lfdobj=harmaccelLfd365, lambda=1e6)$fd
-
-lvl.1 &lt;- (-10:10)/10
-
-#jpeg("canadian.jpeg",width = 800, height = 800)
-
-#par(mfrow=c(2,2))
-
-
-contour(weeks, weeks, cor.fd(weeks, TempSm6), levels=lvl.1,
-        xlab="Temp", 
-        ylab="Temp", 
-        axes=FALSE)
-axisIntervals(1)
-axisIntervals(2)
-text(weeks,weeks,1)
-
-
-contour(weeks, weeks, cor.fd(weeks, TempSm6, weeks, PrecipSm6),
-        levels=lvl.1, xlab="Temp", 
-        ylab="Prec", axes=FALS)
-axisIntervals(1)
-axisIntervals(2)
-
-contour(weeks, weeks, cor.fd(weeks, PrecipSm6, weeks, TempSm6),
-        levels=lvl.1, ylab="Temp", 
-        xlab="Prec", axes=FALSE)
-axisIntervals(1)
-axisIntervals(2)
-
-contour(weeks, weeks, cor.fd(weeks, PrecipSm6), levels=lvl.1,
-        xlab="Prec", 
-        ylab="Prec", 
-        axes=FALSE)
-axisIntervals(1)
-axisIntervals(2)
-text(weeks,weeks,1)
-
-#dev.off()
-</pre>
-
-<p>
--plot:
-</p>
-
-<div id="Canadian-weather" class="figure">
-<p><img src="file:///home/tsui/Documents/FDA/canadian.jpeg" alt="canadian.jpeg" /> 
-</p>
 </div>
 </div>
 </div>
-</div>
-
 
 <div id="outline-container-sec-2-4" class="outline-3">
 <h3 id="sec-2-4"><span class="section-number-3">2.4</span> The anatomy of a function</h3>
@@ -836,7 +770,7 @@ text(weeks,weeks,1)
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Ian XU Sheng</p>
-<p class="date">Created: 2016-08-07 Sun 16:11</p>
+<p class="date">Created: 2016-08-07 Sun 15:41</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
