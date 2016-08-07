@@ -293,11 +293,10 @@ text(weeks,weeks,1)
 *** Functional features
 *** Data resolution and functional dimensionality
 *** The size of a function
-** Phase-plane plconsqots of periodic effects
+** Phase-plane plots of periodic effects
 *** The log nondurable good index
 *** Phase-plane plots show energy transfer
 *** The nondurable goods cycles
 
 ** Further reading and notes
-
    
