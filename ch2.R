@@ -5,7 +5,7 @@ library(reshape)
 
 source("multipolt.R")
 
-pdf("pic.in.ch2.pdf")
+#pdf("pic.in.ch2.pdf")
 
 ###### 1.15 in 2009
 age <- growth$age
@@ -26,13 +26,8 @@ dimnames(cvecf) = list(gr.basis$names,
 
 gr.fd0  = fd(cvecf, gr.basis)
 
-# Create an initial functional parameter object
-# Lfdobj = 3 to penalize the rate of change of acceleration
-
 gr.Lfd    = 3
 
-# Figure 1.15 was created with lambda = 10^(-1.5);
-# we use that also for Figure 1.1
 
 gr.lambda = 10^(-1.5)
 
@@ -201,9 +196,8 @@ plot(nondurables, log="y")
 str(nondurables)
 
 plot(log10(nondurables))
-(log.nondur.lm <- lm(log(nondurables)~time(nondurables)))
 (log10.nondur.lm <- lm(log10(nondurables)~time(nondurables)))
-abline(nondur.lm, lty="dashed")
+abline(log10.nondur.lm, lty="dashed")
 
 length(nondurables)
 
@@ -225,6 +219,14 @@ axis(1, seq(1964, 1967, by=0.5), labels=FALSE)
 
 
 durtimefine <- seq(1964, 1967, length=181)
+
+goodsbasis <- create.bspline.basis(rangeval=c(1919,2000),
+                                   nbasis=979, norder=8)
+LfdobjNonDur <- int2Lfd(4) 
+
+logNondurSm <- smooth.basisPar(argvals=index(nondurables),
+                y=log10(coredata(nondurables)), fdobj=goodsbasis,
+                Lfdobj=LfdobjNonDur, lambda=1e-11)
 
 logNondurSm1964.67 = eval.fd(durtimefine, logNondurSm$fd);
 lines(durtimefine, logNondurSm1964.67)
@@ -252,9 +254,9 @@ goodsbasis <- create.bspline.basis(rangeval=c(1919,2000),
                                    nbasis=979, norder=8)
 LfdobjNonDur <- int2Lfd(4) 
 
-logNondurSm <- smooth.basisPar(argvals=index(nondurables),
-                y=log10(coredata(nondurables)), fdobj=goodsbasis,
-                Lfdobj=LfdobjNonDur, lambda=1e-11)
+#logNondurSm <- smooth.basisPar(argvals=index(nondurables),
+ #               y=log10(coredata(nondurables)), fdobj=goodsbasis,
+  #              Lfdobj=LfdobjNonDur, lambda=1e-11)
 phaseplanePlot(1964, logNondurSm$fd,xlim=c(-0.5,0.5),ylim=c(-7,10))
 
 #dev.off()
