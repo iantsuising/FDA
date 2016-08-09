@@ -65,22 +65,22 @@ par(op)
 
 #dev.off()
 
-daybasis65 = create.fourier.basis(c(0,365), 65)
+daybasis65 <- create.fourier.basis(c(0,365), 65)
 
-coefmat = matrix(0, 65, 35, dimnames=list(
+coefmat <- matrix(0, 65, 35, dimnames=list(
      daybasis65$names, CanadianWeather$place) )
-tempfd. = fd(coefmat, daybasis65)
+tempfd. <- fd(coefmat, daybasis65)
 
 
-fdnames      = list("Age (years)", "Child", "Height (cm)")
+fdnames <- list("Age (years)", "Child", "Height (cm)")
 
 
 
-Tempbasis = create.fourier.basis(c(0,365), 65)
-Tempfd = smooth.basis(day.5,
+Tempbasis <- create.fourier.basis(c(0,365), 65)
+Tempfd <- smooth.basis(day.5,
           CanadianWeather$dailyAv[,,'Temperature.C'], Tempbasis)$fd
-meanTempfd = mean(Tempfd)
-sumTempfd  = sum(Tempfd)
+meanTempfd <- mean(Tempfd)
+sumTempfd <- sum(Tempfd)
 
 par(mfrow=c(1,1))
 plot((meanTempfd-sumTempfd*(1/35)))
@@ -94,12 +94,12 @@ lines(meanTempfd, lty=2)
 
 #  evaluate the derivative of mean temperature and plot
 
-DmeanTempVec = eval.fd(day.5, meanTempfd, 1)
+DmeanTempVec <- eval.fd(day.5, meanTempfd, 1)
 plot(day.5, DmeanTempVec, type='l')
 
 
-harmaccelLfd = vec2Lfd(c(0,c(2*pi/365)^2, 0), c(0, 365))
-LmeanTempVec = eval.fd(day.5, meanTempfd, harmaccelLfd)
+harmaccelLfd <- vec2Lfd(c(0,c(2*pi/365)^2, 0), c(0, 365))
+LmeanTempVec <- eval.fd(day.5, meanTempfd, harmaccelLfd)
 
 par(mfrow=c(1,1))
 plot(day.5, LmeanTempVec, type="l", cex=1.2,
@@ -109,14 +109,14 @@ abline(h=0)
 #pdf("pic.in.fmch4.pdf")
 
 
-dayOfYearShifted = c(182:365, 1:181)
+dayOfYearShifted <- c(182:365, 1:181)
 
-tempmat   = daily$tempav[dayOfYearShifted, ]
-tempbasis = create.fourier.basis(c(0,365),65)
+tempmat <- daily$tempav[dayOfYearShifted, ]
+tempbasis <- create.fourier.basis(c(0,365),65)
 
-temp.fd = smooth.basis(day.5, tempmat, tempbasis)$fd
+temp.fd <- smooth.basis(day.5, tempmat, tempbasis)$fd
 
-temp.fd$fdnames = list("Day (July 2 to June 30)",
+temp.fd$fdnames <- list("Day (July 2 to June 30)",
                       "Weather Station",
                       "Mean temperature (deg. C)")
 
@@ -125,32 +125,32 @@ plot(temp.fd, lwd=2, xlab='Day (July 1 to June 30)',
 
 #4.2
 
-basis13  = create.bspline.basis(c(0,10), 13)
-tvec     = seq(0,1,len=13)
-sinecoef = sin(2*pi*tvec)
-sinefd   = fd(sinecoef, basis13, list("t","","f(t)"))
-op       = par(cex=1.2)
+basis13 <- create.bspline.basis(c(0,10), 13)
+tvec    <- seq(0,1,len=13)
+sinecoef<- sin(2*pi*tvec)
+sinefd  <- fd(sinecoef, basis13, list("t","","f(t)"))
+op      <- par(cex=1.2)
 plot(sinefd, lwd=2)
 points(tvec*10, sinecoef, lwd=2)
 par(op)
 
 cat(MontrealTemp, file='MtlDaily.txt')
 
-MtlDaily = matrix(scan("MtlDaily.txt",0),34,365)
-thawdata = t(MtlDaily[,16:47])
+MtlDaily <- matrix(scan("MtlDaily.txt",0),34,365)
+thawdata <- t(MtlDaily[,16:47])
 
-daytime  = ((16:47)+0.5)
+daytime <- ((16:47)+0.5)
 plot(daytime, apply(thawdata,1,mean), "b", lwd=2,
      xlab="Day", ylab="Temperature (deg C)", cex=1.2)
 
 # 4.4
 
-thawbasis    = create.bspline.basis(c(16,48),7)
-thawbasismat = eval.basis(thawbasis, daytime)
+thawbasis <- create.bspline.basis(c(16,48),7)
+thawbasismat <- eval.basis(thawbasis, daytime)
 
-thawcoef = solve(crossprod(thawbasismat),
+thawcoef <- solve(crossprod(thawbasismat),
     crossprod(thawbasismat,thawdata))
-thawfd   = fd(thawcoef, thawbasis,
+thawfd <- fd(thawcoef, thawbasis,
     list("Day", "Year", "Temperature (deg C)"))
 plot(thawfd, lty=1, lwd=2, col=1)
 
@@ -162,33 +162,33 @@ plotfit.fd(thawdata[,1], daytime, thawfd[1],
 ## Section 4.4 The Linear Differential Operator or Lfd Class
 ##
 
-#omega           = 2*pi/365
-#thawconst.basis = create.constant.basis(thawbasis$rangeval)
+#omega           <- 2*pi/365
+#thawconst.basis <- create.constant.basis(thawbasis$rangeval)
 #
-#betalist       = vector("list", 3)
-#betalist[[1]]  = fd(0, thawconst.basis)
-#betalist[[2]]  = fd(omega^2, thawconst.basis)
-#betalist[[3]]  = fd(0, thawconst.basis)
-#harmaccelLfd.  = Lfd(3, betalist)
+#betalist      <- vector("list", 3)
+#betalist[[1]] <- fd(0, thawconst.basis)
+#betalist[[2]] <- fd(omega^2, thawconst.basis)
+#betalist[[3]] <- fd(0, thawconst.basis)
+#harmaccelLfd. <- Lfd(3, betalist)
 #
-#accelLfd = int2Lfd(2)
+#accelLfd <- int2Lfd(2)
 #
-#harmaccelLfd.thaw = vec2Lfd(c(0,omega^2,0), thawbasis$rangeval)
+#harmaccelLfd.thaw <- vec2Lfd(c(0,omega^2,0), thawbasis$rangeval)
 #all.equal(harmaccelLfd.[-1], harmaccelLfd.thaw[-1])
 #
 #class(accelLfd)
 #class(harmaccelLfd)
 #
-#Ltempmat  = eval.fd(day.5, temp.fd, harmaccelLfd)
+#Ltempmat  <- eval.fd(day.5, temp.fd, harmaccelLfd)
 #
-#D2tempfd = deriv.fd(temp.fd, 2)
-#Ltempfd  = deriv.fd(temp.fd, harmaccelLfd)
+#D2tempfd <- deriv.fd(temp.fd, 2)
+#Ltempfd  <- deriv.fd(temp.fd, harmaccelLfd)
 
 
-#Bspl2 = create.bspline.basis(nbasis=2, norder=1)
-#Bspl3 = create.bspline.basis(nbasis=3, norder=2)
+#Bspl2 <- create.bspline.basis(nbasis=2, norder=1)
+#Bspl3 <- create.bspline.basis(nbasis=3, norder=2)
 
-#corrmat  = array(1:6/6, dim=2:3)
-#bBspl2.3 = bifd(corrmat, Bspl2, Bspl3)
+#corrmat  <- array(1:6/6, dim=2:3)
+#bBspl2.3 <- bifd(corrmat, Bspl2, Bspl3)
 
 dev.off()
