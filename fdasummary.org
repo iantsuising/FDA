@@ -166,7 +166,7 @@ plot(D2hgtffd,ylim=c(-4,2))
 
 - /correlation function/: $\mathbf{corr}_X(t_1,t_2) = \frac{\mathbf{cov}_X(t_1,t_2)}{\sqrt{\mathbf{var}_X(t_1)\mathbf{var}_X(t_2)}}$
 
-
+  
 *** Cross-covariance and cross-correlation functions
 - /cross-covariance/ function: $\mathbf{cov}_{X,Y}(t_1,t_2) = (N-1)^{-1}\Sigma_{i=1}^N\{x_i(t_1) - \bar{x}(t_1)\}\{y_i(t_2)-\bar{y}(t_2)\}$
 
@@ -283,7 +283,7 @@ text(weeks,weeks,1)
 
 #+END_EXAMPLE
 
--plot:
+- plot:
 #+CAPTION: 
 #+NAME: Canadian weather   
 [[/home/tsui/Documents/FDA/canadian.jpeg]] 
@@ -438,8 +438,6 @@ phaseplanePlot(1964, logNondurSm$fd,xlim=c(-0.5,0.5),ylim=c(-7,10))
 - functional data are multidimensional, e.g. images
 
 *** The interplay between smooth and noisy variation
-
-
 *** The standard model for error and its limitations
 *** The resolving power of data
 *** Data resolution and derivative estimation

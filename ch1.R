@@ -190,6 +190,15 @@ p.knee <- ggplot(data=kneedata,aes(x=X1,y=value,colour=X2)) +
 
 multiplot(p.hip,p.knee)
 
+par(mfrow=c(2,1))->op
+
+p.hip
+
+p.knee
+
+par(op)
+
+
 inx <- c(1,4,8,12,16)
 
 pp <- ggplot()+
@@ -253,6 +262,40 @@ logNondurSm <- smooth.basisPar(argvals=index(nondurables),
 phaseplanePlot(1964,logNondurSm$fd)
 
 
+
 #dev.off()
+
+
+###MontrealTemp
+data <-t(MontrealTemp)
+
+tempbasis <- create.fourier.basis(rangeval=c(0, 365), nbasis=65)
+
+tempSm.Mo <- smooth.basisPar(day.5,CanadianWeather$dailyAv[,"Montreal", "Temperature.C"],fdobj=tempbasis,Lfdobj = vec2Lfd(c(0,(2*pi/365)^2,0), c(0, 365)),lambda=1e6)$fd
+
+plot(tempSm.Mo)
+text(monthMid, CanadianWeather$monthlyTemp[, "Montreal"],  monthLetters)
+axis(2)
+axisIntervals(1)
+
+
+phaseplanePlot(fdobj = tempSm.Mo,Lfdobj1 = 0, Lfdobj2 = 2,ylim=c(0.007,-0.007),lty = c("solid","solid"),abline=list(h=0, lty=2),xlab="Temp",ylab="2nd Deriv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
