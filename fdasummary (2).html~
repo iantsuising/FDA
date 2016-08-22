@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Functional Data Analysis</title>
+<!-- 2016-08-10 Wed 15:38 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Ian XU Sheng" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Functional Data Analysis</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Ch1 Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1. What is functional data</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Growth data</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Non durable good index</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Oil refinery</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Functional models for nonfunctional data</a></li>
+<li><a href="#sec-1-3">1.3. Some functional data analysis</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Four Locations' Monthly Mean Temperature in Canadian</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Gait data</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. The goal of FDA</a></li>
+<li><a href="#sec-1-5">1.5. The first step on a functional data analysis</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1. Smoothing vs Interpolation</a></li>
+<li><a href="#sec-1-5-2">1.5.2. Data registration or feature alignment</a></li>
+<li><a href="#sec-1-5-3">1.5.3. Data display</a></li>
+<li><a href="#sec-1-5-4">1.5.4. Plotting pairs of derivatives</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6. Exploring variability in functional data</a>
+<ul>
+<li><a href="#sec-1-6-1">1.6.1. Functional descriptive statistics</a></li>
+<li><a href="#sec-1-6-2">1.6.2. Functional PCA</a></li>
+<li><a href="#sec-1-6-3">1.6.3. Functional canonical correlation</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-7">1.7. Functional linear model</a></li>
+<li><a href="#sec-1-8">1.8. Using derivative in FDA</a></li>
+<li><a href="#sec-1-9">1.9. Concluding remarks</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Ch2 Tools for exploring functional data</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Introduction</a></li>
+<li><a href="#sec-2-2">2.2. Some notation</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. Scalars, vectors, functional and matrices</a></li>
+<li><a href="#sec-2-2-2">2.2.2. Derivatives and integrals</a></li>
+<li><a href="#sec-2-2-3">2.2.3. Inner products</a></li>
+<li><a href="#sec-2-2-4">2.2.4. Function of functions</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. Summary statistics for functional data</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. Functional means and variance</a></li>
+<li><a href="#sec-2-3-2">2.3.2. Covariance and correlation functions</a></li>
+<li><a href="#sec-2-3-3">2.3.3. Cross-covariance and cross-correlation functions</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. The anatomy of a function</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1. Functional features</a></li>
+<li><a href="#sec-2-4-2">2.4.2. Data resolution and functional dimensionality</a></li>
+<li><a href="#sec-2-4-3">2.4.3. The size of a function</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-5">2.5. Phase-plane plconsqots of periodic effects</a>
+<ul>
+<li><a href="#sec-2-5-1">2.5.1. The log nondurable good index</a></li>
+<li><a href="#sec-2-5-2">2.5.2. Phase-plane plots show energy transfer</a></li>
+<li><a href="#sec-2-5-3">2.5.3. The nondurable goods cycles</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-6">2.6. Further reading and notes</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Ch3 From functional data to smooth functions</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Introduction</a></li>
+<li><a href="#sec-3-2">3.2. Some properties of functional data</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. What makes discrete data functional</a></li>
+<li><a href="#sec-3-2-2">3.2.2. Samples of functional data</a></li>
+<li><a href="#sec-3-2-3">3.2.3. The interplay between smooth and noisy variation</a></li>
+<li><a href="#sec-3-2-4">3.2.4. The standard model for error and its limitations</a></li>
+<li><a href="#sec-3-2-5">3.2.5. The resolving power of data</a></li>
+<li><a href="#sec-3-2-6">3.2.6. Data resolution and derivative estimation</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Representing functions by basis functions</a></li>
+<li><a href="#sec-3-4">3.4. The Fourier basis system for periodic data</a></li>
+<li><a href="#sec-3-5">3.5. The spline system for open-ended data</a>
+<ul>
+<li><a href="#sec-3-5-1">3.5.1. Spline functions and degrees of freedom</a></li>
+<li><a href="#sec-3-5-2">3.5.2. The B-spline basis for spline functions</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-6">3.6. Other useful basis system</a>
+<ul>
+<li><a href="#sec-3-6-1">3.6.1. Wavelets</a></li>
+<li><a href="#sec-3-6-2">3.6.2. Exponential and power bases</a></li>
+<li><a href="#sec-3-6-3">3.6.3. Polynomial bases</a></li>
+<li><a href="#sec-3-6-4">3.6.4. The polygonal basis</a></li>
+<li><a href="#sec-3-6-5">3.6.5. The step-function basis</a></li>
+<li><a href="#sec-3-6-6">3.6.6. The constant basis</a></li>
+<li><a href="#sec-3-6-7">3.6.7. Empirical and designer bases</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-7">3.7. Choosing a scale for t</a></li>
+<li><a href="#sec-3-8">3.8. Further reading and notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Ch1 Introduction</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> What is functional data</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Example for plot
+</p>
+
+<pre class="example">
+data(growth)
+hgtm = growth$hgtm
+hgtf = growth$hgtf                       
+age = growth$age
+
+
+knots  &lt;- growth$age
+norder &lt;- 6
+nbasis &lt;- length(knots) + norder - 2
+hgtbasis &lt;- create.bspline.basis(c(1,18), nbasis, norder, knots)
+
+Lfdobj &lt;- 4
+lambda &lt;- 1e-1
+growfdPar &lt;- fdPar(hgtbasis, Lfdobj, lambda)
+
+hgtffd &lt;- smooth.basis(age, hgtf[,1:10], growfdPar)$fd
+
+age&lt;-growth$age
+
+dat&lt;-melt(growth$hgtf[,1:10])
+
+ggplot(data=dat,
+       aes(x=X1,y=value,colour=X2)) +
+    geom_line()+
+    geom_point()
+
+D1hgtffd &lt;- deriv.fd(hgtffd,1)
+D2hgtffd &lt;- deriv.fd(hgtffd,2)
+
+plot(D2hgtffd,ylim=c(-4,2))
+</pre>
+</div>
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Growth data</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li>Repeat measured
+</li>
+<li>Unequally spaced
+</li>
+<li>Plot the data vs derivative (first or second order for further analysis)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Non durable good index</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<ul class="org-ul">
+<li>Like a time series, no repeated measure
+</li>
+<li>Equally spaced
+</li>
+<li>Periodical 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Oil refinery</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li>repeated measured
+</li>
+<li>Equally spaced    
+</li>
+<li>Paired 
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Functional models for nonfunctional data</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>R, W, R,2002's paper
+</li>
+<li>Using logistic model for different term
+</li>
+<li>P is a function of &theta;
+</li>
+<li>For different term, the smoothed functions become functional data 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Some functional data analysis</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Four Locations' Monthly Mean Temperature in Canadian</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ul class="org-ul">
+<li>Plot the data for initial guess
+</li>
+<li>The curves look like sinusoidal
+</li>
+<li>Find a <b>forcing function</b> L-temp for testing the sinusoidal
+</li>
+<li>Plot the time vs L-temp
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Gait data</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<ul class="org-ul">
+<li>Repeated measure
+</li>
+<li>Paired
+</li>
+<li>Using phase-plant plot to plot the average path vs a path from a particular observation
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> The goal of FDA</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>To represent the data in ways that aid further analysis
+</li>
+<li>To display the data so as to highlight various characteristics
+</li>
+<li>To Study important sources of pattern and variation among the data
+</li>
+<li>To explain variation in an outcome or dependent variable by using input or independent variable information
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> The first step on a functional data analysis</h3>
+<div class="outline-text-3" id="text-1-5">
+</div><div id="outline-container-sec-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> Smoothing vs Interpolation</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<ul class="org-ul">
+<li>Interpolation assumes the data observed is errorless.
+</li>
+<li>If they have observational error, then the conversion from discrete data to functional may involve smoothing to remove error.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5-2" class="outline-4">
+<h4 id="sec-1-5-2"><span class="section-number-4">1.5.2</span> Data registration or feature alignment</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<ul class="org-ul">
+<li>e.g. Pinch data
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-5-3" class="outline-4">
+<h4 id="sec-1-5-3"><span class="section-number-4">1.5.3</span> Data display</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<ul class="org-ul">
+<li>e.g. Gait data
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-5-4" class="outline-4">
+<h4 id="sec-1-5-4"><span class="section-number-4">1.5.4</span> Plotting pairs of derivatives</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<ul class="org-ul">
+<li>e.g. Canadian temperature data and nondurable good index.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Exploring variability in functional data</h3>
+<div class="outline-text-3" id="text-1-6">
+</div><div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> Functional descriptive statistics</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<ul class="org-ul">
+<li>Chapter2
+</li>
+<li>Chapter7 returns to summary problem, i.e. registration and alignment etc.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> Functional PCA</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<ul class="org-ul">
+<li>Chapter 8, 9, 10
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6-3" class="outline-4">
+<h4 id="sec-1-6-3"><span class="section-number-4">1.6.3</span> Functional canonical correlation</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<ul class="org-ul">
+<li>A simple canonical correlation: determining the relationship between group of variables in a data set.
+</li>
+<li>The data set is split to two groups X and Y, based on some common characteristics.
+</li>
+<li>Mathematically, max U'X'YV s.t. U'X'XU = I and V'Y'YV=I.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Functional linear model</h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>Chapter 12-17 
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Using derivative in FDA</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>Chapter 18-21
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Concluding remarks</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>SHI Jian qing 2012 doubly miss-specified models
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Ch2 Tools for exploring functional data</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>We heavily draw on the matrix analysis and multivariate statistics.
+</li>
+<li>Section 2.2: Notations
+</li>
+<li>Section 2.4: anatomy of a function
+</li>
+<li>Features might be interested
+</li>
+<li>How different from vectors
+</li>
+<li>How to quantify the amount of information
+</li>
+<li>What is smooth
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Some notation</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Scalars, vectors, functional and matrices</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ul class="org-ul">
+<li>\(x\) can be a function or a scalar; a function is to be considered as single unitary entity
+</li>
+<li>notation \(x(t)\) refers to the <i>value</i> of a function \(x\) at argument \(t\); \(x(t)\) is also a scalar.
+</li>
+<li>\(\textbf{x}\) refers to a vector.
+</li>
+<li>\(x(\textbf{t})\): the values of function \(x\) at each argument values in vector \(textbf{t}\).
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Derivatives and integrals</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<ul class="org-ul">
+<li>the derivative of order \(m\) of a function \(x\) is \(D^mx\)
+</li>
+<li>\(D^0x\) refers to \(x\) itself
+</li>
+<li>\(D^{-1}x\) refers to indefinite a.k.a antiderivative integral, since \(D^1D^{-1}x=D^0x=x\)
+</li>
+<li>integral: \(\int x\) for \(\int_{a}^{b} x dx\)
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3"><span class="section-number-4">2.2.3</span> Inner products</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<ul class="org-ul">
+<li>The most common one: 2 <i>norm</i> \(||x||\)
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2-4" class="outline-4">
+<h4 id="sec-2-2-4"><span class="section-number-4">2.2.4</span> Function of functions</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<ul class="org-ul">
+<li>a linear transformation \(h(t)\) of argument \(t\) that maps \(t\) on to the same interval that it occupies
+</li>
+<li>then we need the function \(x\) whose values are \(x[h(t)]\), which indicated by \(x^*\)
+</li>
+<li><i>functional composition</i> notation \(x^* = x \circ h\)
+</li>
+<li>the value \(x^*\) is indicated by \((x \circ h)(t)\)
+</li>
+<li><i>inverse</i> function which results from solving the relation \(h(g) = t\) for \(g\) given \(t\)
+</li>
+<li>the function having \(g(t)\) is denoted by \(h^{-1}\)
+</li>
+<li>\(h^{-1}[h(t)] = (h \circ h^{-1})(t) = (h^{-1} \circ h)(t) = t\)
+</li>
+
+<li>another type of transformation: one function into another: \(D\): transform \(x\) into its derivative \(Dx\)
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Summary statistics for functional data</h3>
+<div class="outline-text-3" id="text-2-3">
+</div><div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Functional means and variance</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<ul class="org-ul">
+<li>the mean function with value: \(\bar{x} = N^{-1} \Sigma_{i=1}^Nx_i(t)\)
+</li>
+
+<li>variance function: \(\mathbf{var}_X(t) = (N-1)^{-1}\Sigma_{i=1}^N[x_i(t) - \bar{x}(t)]^2\)
+</li>
+</ul>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Covariance and correlation functions</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<ul class="org-ul">
+<li><i>covariance function</i>: \(\mathbf{cov}_X(t_1,t_2) = (N-1)^{-1}\Sigma_{i=1}^N\{x_i(t_1) - \bar{x}(t_1)\}\{x_i(t_2)-\bar{x}(t_2)\}\)
+</li>
+
+<li><i>correlation function</i>: \(\mathbf{corr}_X(t_1,t_2) = \frac{\mathbf{cov}_X(t_1,t_2)}{\sqrt{\mathbf{var}_X(t_1)\mathbf{var}_X(t_2)}}\)
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-3-3" class="outline-4">
+<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> Cross-covariance and cross-correlation functions</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<ul class="org-ul">
+<li><i>cross-covariance</i> function: \(\mathbf{cov}_{X,Y}(t_1,t_2) = (N-1)^{-1}\Sigma_{i=1}^N\{x_i(t_1) - \bar{x}(t_1)\}\{y_i(t_2)-\bar{y}(t_2)\}\)
+</li>
+
+<li><i>cross-correlation</i> function: \(\mathbf{corr}_{X,Y}(t_1,t_2) = \frac{\mathbf{cov}_{X,Y}(t_1,t_2)}{\sqrt{\mathbf{var}_X(t_1)\mathbf{var}_Y(t_2)}}\)
+</li>
+
+<li>Gait data:
+</li>
+<li>sample code:
+</li>
+</ul>
+<pre class="example">
+(gaittime &lt;- as.numeric(dimnames(gait)[[1]]))
+
+gaitbasis21 &lt;- create.fourier.basis(nbasis=21)
+
+harmaccelLfd01 &lt;- vec2Lfd(c(0, 0, (2*pi)^2, 0))
+
+gaitfd &lt;- smooth.basisPar(gaittime, gait,
+       gaitbasis21, Lfdobj=harmaccelLfd01, lambda=1e-11)$fd
+
+gaitfd$fdnames
+# Change some of the names 
+names(gaitfd$fdnames) = c("Normalized time", "Child", "Angle")
+gaitfd$fdnames[[3]] = c("Hip", "Knee")
+
+# Establish a finer grid so the plot appears smoother 
+(gaitTimeSm &lt;- seq(0, 1, length=41))
+gaitCor &lt;- cor.fd(gaitTimeSm, gaitfd)
+
+gaitCorLbls &lt;- (-5:5)/5
+
+jpeg("gait.jpeg",width = 800, height = 800)
+
+par(mfrow=c(2,2))
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,1], labcex=1.2,
+        levels=gaitCorLbls, xlab="Knee",
+        ylab="Knee")
+x01. &lt;- seq(0, 1, .05)
+text(x01., x01., 1)
+
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,2], labcex=1.2,
+        levels=gaitCorLbls, ylab="Knee",
+        xlab="Hip")
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,2], labcex=1.2,
+        levels=gaitCorLbls, xlab="Knee",
+        ylab="Hip")
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,3], labcex=1.2,
+        levels=gaitCorLbls, xlab="Hip",
+        ylab="Hip")
+text(x01., x01., 1)
+
+dev.off()
+</pre>
+
+<ul class="org-ul">
+<li>plot:
+</li>
+</ul>
+
+<div id="Gait" class="figure">
+<p><img src="file:///home/tsui/Documents/FDA/gait.jpeg" alt="gait.jpeg" /> 
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Canadian weather data:
+</li>
+<li>sample code:
+</li>
+</ul>
+<pre class="example">
+daybasis65 &lt;- create.fourier.basis(c(0, 365), nbasis=65)
+#  -----------  set up the harmonic acceleration operator  ----------
+harmaccelLfd365 &lt;- vec2Lfd(c(0,(2*pi/365)^2,0), c(0, 365))
+
+
+
+TempSm6 &lt;- smooth.basisPar(argvals=day.5, y=CanadianWeather$dailyAv[,,1],
+     fdobj=daybasis65, Lfdobj=harmaccelLfd365, lambda=1e6)$fd
+
+PrecipSm6 &lt;- smooth.basisPar(argvals=day.5, y=CanadianWeather$dailyAv[,,3],
+     fdobj=daybasis65, Lfdobj=harmaccelLfd365, lambda=1e6)$fd
+
+lvl.1 &lt;- (-10:10)/10
+
+#jpeg("canadian.jpeg",width = 800, height = 800)
+
+#par(mfrow=c(2,2))
+
+
+contour(weeks, weeks, cor.fd(weeks, TempSm6), levels=lvl.1,
+        xlab="Temp", 
+        ylab="Temp", 
+        axes=FALSE)
+axisIntervals(1)
+axisIntervals(2)
+text(weeks,weeks,1)
+
+
+contour(weeks, weeks, cor.fd(weeks, TempSm6, weeks, PrecipSm6),
+        levels=lvl.1, xlab="Temp", 
+        ylab="Prec", axes=FALS)
+axisIntervals(1)
+axisIntervals(2)
+
+contour(weeks, weeks, cor.fd(weeks, PrecipSm6, weeks, TempSm6),
+        levels=lvl.1, ylab="Temp", 
+        xlab="Prec", axes=FALSE)
+axisIntervals(1)
+axisIntervals(2)
+
+contour(weeks, weeks, cor.fd(weeks, PrecipSm6), levels=lvl.1,
+        xlab="Prec", 
+        ylab="Prec", 
+        axes=FALSE)
+axisIntervals(1)
+axisIntervals(2)
+text(weeks,weeks,1)
+
+#dev.off()
+</pre>
+
+<p>
+-plot:
+</p>
+
+<div id="Canadian-weather" class="figure">
+<p><img src="file:///home/tsui/Documents/FDA/canadian.jpeg" alt="canadian.jpeg" /> 
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> The anatomy of a function</h3>
+<div class="outline-text-3" id="text-2-4">
+</div><div id="outline-container-sec-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> Functional features</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<ul class="org-ul">
+<li>figure 1.2 as an example:
+<ul class="org-ul">
+<li><i>peak</i> and <i>valley</i> defining the pubertal growth spurt, as well as the smaller peaks at age 6 for the most girls
+</li>
+<li><i>crossings</i> of specified levels can also be important: e.g. the age where the acceleration is zero in the middle of the pubertal growth spurt
+</li>
+<li><i>levels</i> are function values the we consider significant, e.g. the zero level that a growth acceleration reaches after the growth stopped
+</li>
+</ul>
+</li>
+
+<li>each functional feature can be considered as a event, which is associated with a specific value of the argument \(t\)
+<ul class="org-ul">
+<li>most features are characterized by a <i>location</i>
+</li>
+<li>many are also defined by <i>amplitude</i>, i.e. the height and depth of peaks and valley
+</li>
+<li>Also, peaks and valley are measured by <i>width</i>
+</li>
+</ul>
+</li>
+
+<li>levels are 1-dim; crossings are 2-dim; peaks and valleys are 3-dim.
+</li>
+
+<li>for example, we need 3 pieces of info to define peaks and valley under the errorless assumption
+</li>
+
+<li><i>dimensionality</i> of a functional feature tells us how much info we need to estimate it
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> Data resolution and functional dimensionality</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<ul class="org-ul">
+<li><i>high resolution</i> &#x2013; pin down small events
+</li>
+<li>the <i>resolution</i> of a set of data is more useful than the number of observation
+</li>
+<li>roughly spanking, it is the sum across functional "features" of the numbers of pieces of info that are required to define each feature or event
+</li>
+<li>functions are potentially infinite dimensional, i.e. a functional can  pack an infinite number of peaks and valleys within any interval, e.g. white noise
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-4-3" class="outline-4">
+<h4 id="sec-2-4-3"><span class="section-number-4">2.4.3</span> The size of a function</h4>
+<div class="outline-text-4" id="text-2-4-3">
+<ul class="org-ul">
+<li><i>energy</i> tends govern the behavior of many functional variables
+</li>
+<li>smooths changes in small interval since the energy available in a system is conserved
+</li>
+<li>dimensionality of a function is a measure of its <i>size</i>, e.g. white noise is infintely large
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Phase-plane plconsqots of periodic effects</h3>
+<div class="outline-text-3" id="text-2-5">
+</div><div id="outline-container-sec-2-5-1" class="outline-4">
+<h4 id="sec-2-5-1"><span class="section-number-4">2.5.1</span> The log nondurable good index</h4>
+<div class="outline-text-4" id="text-2-5-1">
+<ul class="org-ul">
+<li>The variation of the good index on four time scales:
+<ul class="org-ul">
+<li>the longest: nearly linear increase in the log index, or exponential trend in itself
+</li>
+<li>the events last a decade or more
+</li>
+<li>shorten term perturbations, WWII 38'-40', VW 74'
+</li>
+<li>shortest scale: seasonal variation over annual cycles
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5-2" class="outline-4">
+<h4 id="sec-2-5-2"><span class="section-number-4">2.5.2</span> Phase-plane plots show energy transfer</h4>
+<div class="outline-text-4" id="text-2-5-2">
+<ul class="org-ul">
+<li>basic <i>harmonic process</i>
+</li>
+<li><i>kinetic</i>: the machines in full swing; <i>potential</i>: the capital and resources are at hand to do something
+</li>
+<li>a summary:
+<ul class="org-ul">
+<li>a substantial circle
+</li>
+<li>the larger the radius, the more energy transfer
+</li>
+<li>vertical location of the centre: if positive, the net velocity increase
+</li>
+<li>horizontal location of the centre: if positive, the positive velocity, a.k.a. increasing
+</li>
+<li>circle changes year by year
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2-5-3" class="outline-4">
+<h4 id="sec-2-5-3"><span class="section-number-4">2.5.3</span> The nondurable goods cycles</h4>
+<div class="outline-text-4" id="text-2-5-3">
+<pre class="example">
+plot(nondurables, log="y")
+str(nondurables)
+
+plot(log10(nondurables))
+(log.nondur.lm &lt;- lm(log(nondurables)~time(nondurables)))
+(log10.nondur.lm &lt;- lm(log10(nondurables)~time(nondurables)))
+abline(nondur.lm, lty="dashed")
+
+length(nondurables)
+
+diff(range(time(nondurables)))
+
+(nondurGrowth &lt;- (nondurables[973]/nondurables[1]))
+
+
+log(nondurables[973]/nondurables[1])/81
+
+
+nondur1964.67 &lt;- window(nondurables, 1964, 1967)
+
+plot(log10(nondur1964.67), type="p", axes=FALSE, xlab="Year",
+     ylab=expression(paste(log[10], " nondurable goods index")) )
+axis(2)
+axis(1, 1964:1967)
+axis(1, seq(1964, 1967, by=0.5), labels=FALSE)
+
+
+durtimefine &lt;- seq(1964, 1967, length=181)
+
+logNondurSm1964.67 = eval.fd(durtimefine, logNondurSm$fd);
+lines(durtimefine, logNondurSm1964.67)
+abline(v=1965:1966, lty=2)
+
+sin. &lt;- expression(sin(2*pi*x))
+D.sin &lt;- D(sin., "x")
+D2.sin &lt;- D(D.sin, "x")
+
+with(data.frame(x=seq(0, 1, length=46)),
+     plot(eval(D.sin), eval(D2.sin), type="l",
+          xlim=c(-10, 10), ylim=c(-50, 50), 
+          xlab="Velocity", ylab="Acceleration") )
+pi.2 &lt;- (2*pi)
+
+abline(h=0, lty="longdash")
+pi.2.2 &lt;- pi.2^2
+lines(x=c(0,0), y=c(-pi.2.2, pi.2.2), lty="longdash")
+
+text(c(0,0), c(-47, 47), rep("no kinetic, max potential", 2))
+text(c(-8.5,8.5), c(0,0), rep("max kinetic\nno potential", 2))
+
+
+goodsbasis &lt;- create.bspline.basis(rangeval=c(1919,2000),
+                                   nbasis=979, norder=8)
+LfdobjNonDur &lt;- int2Lfd(4) 
+
+logNondurSm &lt;- smooth.basisPar(argvals=index(nondurables),
+                y=log10(coredata(nondurables)), fdobj=goodsbasis,
+                Lfdobj=LfdobjNonDur, lambda=1e-11)
+phaseplanePlot(1964, logNondurSm$fd,xlim=c(-0.5,0.5),ylim=c(-7,10))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Further reading and notes</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Ch3 From functional data to smooth functions</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>pros of using linear combinations of basis functions:
+<ul class="org-ul">
+<li>basis functions and computational devices adapted the strong info if the functions
+</li>
+<li>strong computational power for even large data
+</li>
+<li>calculated with matrix algebra
+</li>
+</ul>
+</li>
+<li>2 main basis systems, and the others
+<ul class="org-ul">
+<li>Fourier system for periodic data
+</li>
+<li>B-spline system for data with no obvious cycles
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Some properties of functional data</h3>
+<div class="outline-text-3" id="text-3-2">
+</div><div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> What makes discrete data functional</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<ul class="org-ul">
+<li>smoothing makes discrete data functional
+<ul class="org-ul">
+<li>\(y_i\) and \(y_{i+1}\) are necessarily linked together; unlikely to be too different
+</li>
+<li>if the smoothness does not apply, it becomes multivariate data
+</li>
+</ul>
+</li>
+
+<li>By smooth, we can take m order derivatives for function \(x\)
+</li>
+<li>\(D^mx(t)\) refers to the derivative value at argument \(t\)
+</li>
+
+<li>analysis of system's <i>dynamics</i>: the modelling of a system's rate of change
+</li>
+
+<li>the actual observed data may bot at all be smooth due to so call noise or measurement error
+</li>
+
+<li>noise:
+<ul class="org-ul">
+<li>formless and predictable
+</li>
+<li>noise level is a tiny function of the size of the function at some cases, a.k.a. <i>signal-to-noise ratio</i> is high
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Samples of functional data</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ul class="org-ul">
+<li><i>periodic boundary conditions</i> are satisfied when time \(t\) is considered cyclically
+</li>
+<li>functional data are multidimensional, e.g. images
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> The interplay between smooth and noisy variation</h4>
+</div>
+<div id="outline-container-sec-3-2-4" class="outline-4">
+<h4 id="sec-3-2-4"><span class="section-number-4">3.2.4</span> The standard model for error and its limitations</h4>
+</div>
+<div id="outline-container-sec-3-2-5" class="outline-4">
+<h4 id="sec-3-2-5"><span class="section-number-4">3.2.5</span> The resolving power of data</h4>
+</div>
+<div id="outline-container-sec-3-2-6" class="outline-4">
+<h4 id="sec-3-2-6"><span class="section-number-4">3.2.6</span> Data resolution and derivative estimation</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Representing functions by basis functions</h3>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> The Fourier basis system for periodic data</h3>
+</div>
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> The spline system for open-ended data</h3>
+<div class="outline-text-3" id="text-3-5">
+</div><div id="outline-container-sec-3-5-1" class="outline-4">
+<h4 id="sec-3-5-1"><span class="section-number-4">3.5.1</span> Spline functions and degrees of freedom</h4>
+</div>
+<div id="outline-container-sec-3-5-2" class="outline-4">
+<h4 id="sec-3-5-2"><span class="section-number-4">3.5.2</span> The B-spline basis for spline functions</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Other useful basis system</h3>
+<div class="outline-text-3" id="text-3-6">
+</div><div id="outline-container-sec-3-6-1" class="outline-4">
+<h4 id="sec-3-6-1"><span class="section-number-4">3.6.1</span> Wavelets</h4>
+</div>
+<div id="outline-container-sec-3-6-2" class="outline-4">
+<h4 id="sec-3-6-2"><span class="section-number-4">3.6.2</span> Exponential and power bases</h4>
+</div>
+<div id="outline-container-sec-3-6-3" class="outline-4">
+<h4 id="sec-3-6-3"><span class="section-number-4">3.6.3</span> Polynomial bases</h4>
+</div>
+<div id="outline-container-sec-3-6-4" class="outline-4">
+<h4 id="sec-3-6-4"><span class="section-number-4">3.6.4</span> The polygonal basis</h4>
+</div>
+<div id="outline-container-sec-3-6-5" class="outline-4">
+<h4 id="sec-3-6-5"><span class="section-number-4">3.6.5</span> The step-function basis</h4>
+</div>
+<div id="outline-container-sec-3-6-6" class="outline-4">
+<h4 id="sec-3-6-6"><span class="section-number-4">3.6.6</span> The constant basis</h4>
+</div>
+<div id="outline-container-sec-3-6-7" class="outline-4">
+<h4 id="sec-3-6-7"><span class="section-number-4">3.6.7</span> Empirical and designer bases</h4>
+</div>
+</div>
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Choosing a scale for t</h3>
+</div>
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><span class="section-number-3">3.8</span> Further reading and notes</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Ian XU Sheng</p>
+<p class="date">Created: 2016-08-10 Wed 15:38</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

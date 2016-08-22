@@ -1,0 +1,460 @@
+#+TITLE: Functional Data Analysis
+#+AUTHOR: Ian XU Sheng
+#+EMAIL: ian.tsuising@gmail.com
+
+* Ch1 Introduction
+** What is functional data
+Example for plot
+
+   #+BEGIN_SRC 
+data(growth)
+hgtm = growth$hgtm
+hgtf = growth$hgtf                       
+age = growth$age
+
+
+knots  <- growth$age
+norder <- 6
+nbasis <- length(knots) + norder - 2
+hgtbasis <- create.bspline.basis(c(1,18), nbasis, norder, knots)
+
+Lfdobj <- 4
+lambda <- 1e-1
+growfdPar <- fdPar(hgtbasis, Lfdobj, lambda)
+
+hgtffd <- smooth.basis(age, hgtf[,1:10], growfdPar)$fd
+
+age<-growth$age
+
+dat<-melt(growth$hgtf[,1:10])
+
+ggplot(data=dat,
+       aes(x=X1,y=value,colour=X2)) +
+    geom_line()+
+    geom_point()
+
+D1hgtffd <- deriv.fd(hgtffd,1)
+D2hgtffd <- deriv.fd(hgtffd,2)
+
+plot(D2hgtffd,ylim=c(-4,2))
+
+      #+END_SRC
+*** Growth data
+- Repeat measured
+- Unequally spaced
+- Plot the data vs derivative (first or second order for further analysis)
+
+*** Non durable good index
+- Like a time series, no repeated measure
+- Equally spaced
+- Periodical 
+
+*** Oil refinery
+- repeated measured
+- Equally spaced    
+- Paired 
+
+
+** Functional models for nonfunctional data
+- R, W, R,2002's paper
+- Using logistic model for different term
+- P is a function of \theta
+- For different term, the smoothed functions become functional data 
+
+** Some functional data analysis
+*** Four Locations' Monthly Mean Temperature in Canadian
+- Plot the data for initial guess
+- The curves look like sinusoidal
+- Find a *forcing function* L-temp for testing the sinusoidal
+- Plot the time vs L-temp
+
+*** Gait data
+- Repeated measure
+- Paired
+- Using phase-plant plot to plot the average path vs a path from a particular observation
+   
+** The goal of FDA
+- To represent the data in ways that aid further analysis
+- To display the data so as to highlight various characteristics
+- To Study important sources of pattern and variation among the data
+- To explain variation in an outcome or dependent variable by using input or independent variable information
+  
+
+** The first step on a functional data analysis
+*** Smoothing vs Interpolation
+- Interpolation assumes the data observed is errorless.
+- If they have observational error, then the conversion from discrete data to functional may involve smoothing to remove error.
+	
+*** Data registration or feature alignment
+- e.g. Pinch data
+*** Data display
+- e.g. Gait data
+*** Plotting pairs of derivatives
+- e.g. Canadian temperature data and nondurable good index.
+** Exploring variability in functional data
+*** Functional descriptive statistics
+- Chapter2
+- Chapter7 returns to summary problem, i.e. registration and alignment etc.
+*** Functional PCA
+- Chapter 8, 9, 10
+  
+*** Functional canonical correlation
+- A simple canonical correlation: determining the relationship between group of variables in a data set.
+- The data set is split to two groups X and Y, based on some common characteristics.
+- Mathematically, max U'X'YV s.t. U'X'XU = I and V'Y'YV=I.
+
+** Functional linear model
+- Chapter 12-17 
+** Using derivative in FDA
+- Chapter 18-21
+** Concluding remarks
+
+- SHI Jian qing 2012 doubly miss-specified models
+
+
+  
+
+
+* Ch2 Tools for exploring functional data
+** Introduction
+- We heavily draw on the matrix analysis and multivariate statistics.
+- Section 2.2: Notations
+- Section 2.4: anatomy of a function
+- Features might be interested
+- How different from vectors
+- How to quantify the amount of information
+- What is smooth
+
+** Some notation
+*** Scalars, vectors, functional and matrices
+- $x$ can be a function or a scalar; a function is to be considered as single unitary entity
+- notation $x(t)$ refers to the /value/ of a function $x$ at argument $t$; $x(t)$ is also a scalar.
+- $\textbf{x}$ refers to a vector.
+- $x(\textbf{t})$: the values of function $x$ at each argument values in vector $textbf{t}$.
+
+*** Derivatives and integrals
+- the derivative of order $m$ of a function $x$ is $D^mx$
+- $D^0x$ refers to $x$ itself
+- $D^{-1}x$ refers to indefinite a.k.a antiderivative integral, since $D^1D^{-1}x=D^0x=x$
+- integral: $\int x$ for $\int_{a}^{b} x dx$
+
+
+*** Inner products
+- The most common one: 2 /norm/ $||x||$
+
+*** Function of functions
+- a linear transformation $h(t)$ of argument $t$ that maps $t$ on to the same interval that it occupies
+- then we need the function $x$ whose values are $x[h(t)]$, which indicated by $x^*$
+- /functional composition/ notation $x^* = x \circ h$
+- the value $x^*$ is indicated by $(x \circ h)(t)$
+- /inverse/ function which results from solving the relation $h(g) = t$ for $g$ given $t$
+- the function having $g(t)$ is denoted by $h^{-1}$
+- $h^{-1}[h(t)] = (h \circ h^{-1})(t) = (h^{-1} \circ h)(t) = t$
+
+- another type of transformation: one function into another: $D$: transform $x$ into its derivative $Dx$
+
+** Summary statistics for functional data
+*** Functional means and variance
+- the mean function with value: $\bar{x} = N^{-1} \Sigma_{i=1}^Nx_i(t)$
+
+- variance function: $\mathbf{var}_X(t) = (N-1)^{-1}\Sigma_{i=1}^N[x_i(t) - \bar{x}(t)]^2$
+
+
+
+*** Covariance and correlation functions
+- /covariance function/: $\mathbf{cov}_X(t_1,t_2) = (N-1)^{-1}\Sigma_{i=1}^N\{x_i(t_1) - \bar{x}(t_1)\}\{x_i(t_2)-\bar{x}(t_2)\}$
+
+- /correlation function/: $\mathbf{corr}_X(t_1,t_2) = \frac{\mathbf{cov}_X(t_1,t_2)}{\sqrt{\mathbf{var}_X(t_1)\mathbf{var}_X(t_2)}}$
+
+  
+*** Cross-covariance and cross-correlation functions
+- /cross-covariance/ function: $\mathbf{cov}_{X,Y}(t_1,t_2) = (N-1)^{-1}\Sigma_{i=1}^N\{x_i(t_1) - \bar{x}(t_1)\}\{y_i(t_2)-\bar{y}(t_2)\}$
+
+- /cross-correlation/ function: $\mathbf{corr}_{X,Y}(t_1,t_2) = \frac{\mathbf{cov}_{X,Y}(t_1,t_2)}{\sqrt{\mathbf{var}_X(t_1)\mathbf{var}_Y(t_2)}}$
+
+- Gait data:
+- sample code:
+#+BEGIN_EXAMPLE
+(gaittime <- as.numeric(dimnames(gait)[[1]]))
+
+gaitbasis21 <- create.fourier.basis(nbasis=21)
+
+harmaccelLfd01 <- vec2Lfd(c(0, 0, (2*pi)^2, 0))
+
+gaitfd <- smooth.basisPar(gaittime, gait,
+       gaitbasis21, Lfdobj=harmaccelLfd01, lambda=1e-11)$fd
+
+gaitfd$fdnames
+# Change some of the names 
+names(gaitfd$fdnames) = c("Normalized time", "Child", "Angle")
+gaitfd$fdnames[[3]] = c("Hip", "Knee")
+
+# Establish a finer grid so the plot appears smoother 
+(gaitTimeSm <- seq(0, 1, length=41))
+gaitCor <- cor.fd(gaitTimeSm, gaitfd)
+
+gaitCorLbls <- (-5:5)/5
+
+jpeg("gait.jpeg",width = 800, height = 800)
+
+par(mfrow=c(2,2))
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,1], labcex=1.2,
+        levels=gaitCorLbls, xlab="Knee",
+        ylab="Knee")
+x01. <- seq(0, 1, .05)
+text(x01., x01., 1)
+
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,2], labcex=1.2,
+        levels=gaitCorLbls, ylab="Knee",
+        xlab="Hip")
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,2], labcex=1.2,
+        levels=gaitCorLbls, xlab="Knee",
+        ylab="Hip")
+
+contour(gaitTimeSm, gaitTimeSm, gaitCor[,,1,3], labcex=1.2,
+        levels=gaitCorLbls, xlab="Hip",
+        ylab="Hip")
+text(x01., x01., 1)
+
+dev.off()
+
+#+END_EXAMPLE
+
+- plot:
+#+CAPTION: 
+#+NAME: Gait   
+[[/home/tsui/Documents/FDA/gait.jpeg]] 
+
+- Canadian weather data:
+- sample code:
+#+BEGIN_EXAMPLE
+daybasis65 <- create.fourier.basis(c(0, 365), nbasis=65)
+#  -----------  set up the harmonic acceleration operator  ----------
+harmaccelLfd365 <- vec2Lfd(c(0,(2*pi/365)^2,0), c(0, 365))
+
+
+
+TempSm6 <- smooth.basisPar(argvals=day.5, y=CanadianWeather$dailyAv[,,1],
+     fdobj=daybasis65, Lfdobj=harmaccelLfd365, lambda=1e6)$fd
+
+PrecipSm6 <- smooth.basisPar(argvals=day.5, y=CanadianWeather$dailyAv[,,3],
+     fdobj=daybasis65, Lfdobj=harmaccelLfd365, lambda=1e6)$fd
+
+lvl.1 <- (-10:10)/10
+
+#jpeg("canadian.jpeg",width = 800, height = 800)
+
+#par(mfrow=c(2,2))
+
+
+contour(weeks, weeks, cor.fd(weeks, TempSm6), levels=lvl.1,
+        xlab="Temp", 
+        ylab="Temp", 
+        axes=FALSE)
+axisIntervals(1)
+axisIntervals(2)
+text(weeks,weeks,1)
+
+
+contour(weeks, weeks, cor.fd(weeks, TempSm6, weeks, PrecipSm6),
+        levels=lvl.1, xlab="Temp", 
+        ylab="Prec", axes=FALS)
+axisIntervals(1)
+axisIntervals(2)
+
+contour(weeks, weeks, cor.fd(weeks, PrecipSm6, weeks, TempSm6),
+        levels=lvl.1, ylab="Temp", 
+        xlab="Prec", axes=FALSE)
+axisIntervals(1)
+axisIntervals(2)
+
+contour(weeks, weeks, cor.fd(weeks, PrecipSm6), levels=lvl.1,
+        xlab="Prec", 
+        ylab="Prec", 
+        axes=FALSE)
+axisIntervals(1)
+axisIntervals(2)
+text(weeks,weeks,1)
+
+#dev.off()
+
+#+END_EXAMPLE
+
+- plot:
+#+CAPTION: 
+#+NAME: Canadian weather   
+[[/home/tsui/Documents/FDA/canadian.jpeg]] 
+
+
+** The anatomy of a function
+*** Functional features
+- figure 1.2 as an example:
+  - /peak/ and /valley/ defining the pubertal growth spurt, as well as the smaller peaks at age 6 for the most girls
+  - /crossings/ of specified levels can also be important: e.g. the age where the acceleration is zero in the middle of the pubertal growth spurt
+  - /levels/ are function values the we consider significant, e.g. the zero level that a growth acceleration reaches after the growth stopped
+
+- each functional feature can be considered as a event, which is associated with a specific value of the argument $t$
+  - most features are characterized by a /location/
+  - many are also defined by /amplitude/, i.e. the height and depth of peaks and valley
+  - Also, peaks and valley are measured by /width/
+
+- levels are 1-dim; crossings are 2-dim; peaks and valleys are 3-dim.
+
+- for example, we need 3 pieces of info to define peaks and valley under the errorless assumption
+
+- /dimensionality/ of a functional feature tells us how much info we need to estimate it
+
+*** Data resolution and functional dimensionality
+- /high resolution/ -- pin down small events
+- the /resolution/ of a set of data is more useful than the number of observation
+- roughly spanking, it is the sum across functional "features" of the numbers of pieces of info that are required to define each feature or event
+- functions are potentially infinite dimensional, i.e. a functional can  pack an infinite number of peaks and valleys within any interval, e.g. white noise
+
+
+*** The size of a function
+- /energy/ tends govern the behavior of many functional variables
+- smooths changes in small interval since the energy available in a system is conserved
+- dimensionality of a function is a measure of its /size/, e.g. white noise is infintely large
+
+** Phase-plane plconsqots of periodic effects
+*** The log nondurable good index
+- The variation of the good index on four time scales:
+  - the longest: nearly linear increase in the log index, or exponential trend in itself
+  - the events last a decade or more
+  - shorten term perturbations, WWII 38'-40', VW 74'
+  - shortest scale: seasonal variation over annual cycles
+
+*** Phase-plane plots show energy transfer
+- basic /harmonic process/
+- /kinetic/: the machines in full swing; /potential/: the capital and resources are at hand to do something
+- a summary:
+  - a substantial circle
+  - the larger the radius, the more energy transfer
+  - vertical location of the centre: if positive, the net velocity increase
+  - horizontal location of the centre: if positive, the positive velocity, a.k.a. increasing
+  - circle changes year by year
+
+
+*** The nondurable goods cycles
+#+BEGIN_EXAMPLE
+
+plot(nondurables, log="y")
+str(nondurables)
+
+plot(log10(nondurables))
+(log.nondur.lm <- lm(log(nondurables)~time(nondurables)))
+(log10.nondur.lm <- lm(log10(nondurables)~time(nondurables)))
+abline(nondur.lm, lty="dashed")
+
+length(nondurables)
+
+diff(range(time(nondurables)))
+
+(nondurGrowth <- (nondurables[973]/nondurables[1]))
+
+
+log(nondurables[973]/nondurables[1])/81
+
+
+nondur1964.67 <- window(nondurables, 1964, 1967)
+
+plot(log10(nondur1964.67), type="p", axes=FALSE, xlab="Year",
+     ylab=expression(paste(log[10], " nondurable goods index")) )
+axis(2)
+axis(1, 1964:1967)
+axis(1, seq(1964, 1967, by=0.5), labels=FALSE)
+
+
+durtimefine <- seq(1964, 1967, length=181)
+
+logNondurSm1964.67 = eval.fd(durtimefine, logNondurSm$fd);
+lines(durtimefine, logNondurSm1964.67)
+abline(v=1965:1966, lty=2)
+
+sin. <- expression(sin(2*pi*x))
+D.sin <- D(sin., "x")
+D2.sin <- D(D.sin, "x")
+
+with(data.frame(x=seq(0, 1, length=46)),
+     plot(eval(D.sin), eval(D2.sin), type="l",
+          xlim=c(-10, 10), ylim=c(-50, 50), 
+          xlab="Velocity", ylab="Acceleration") )
+pi.2 <- (2*pi)
+
+abline(h=0, lty="longdash")
+pi.2.2 <- pi.2^2
+lines(x=c(0,0), y=c(-pi.2.2, pi.2.2), lty="longdash")
+
+text(c(0,0), c(-47, 47), rep("no kinetic, max potential", 2))
+text(c(-8.5,8.5), c(0,0), rep("max kinetic\nno potential", 2))
+
+
+goodsbasis <- create.bspline.basis(rangeval=c(1919,2000),
+                                   nbasis=979, norder=8)
+LfdobjNonDur <- int2Lfd(4) 
+
+logNondurSm <- smooth.basisPar(argvals=index(nondurables),
+                y=log10(coredata(nondurables)), fdobj=goodsbasis,
+                Lfdobj=LfdobjNonDur, lambda=1e-11)
+phaseplanePlot(1964, logNondurSm$fd,xlim=c(-0.5,0.5),ylim=c(-7,10))
+
+
+#+END_EXAMPLE
+	
+** Further reading and notes
+
+* Ch3 From functional data to smooth functions
+** Introduction
+- pros of using linear combinations of basis functions:
+  - basis functions and computational devices adapted the strong info if the functions
+  - strong computational power for even large data
+  - calculated with matrix algebra
+- 2 main basis systems, and the others
+  - Fourier system for periodic data
+  - B-spline system for data with no obvious cycles
+
+** Some properties of functional data
+*** What makes discrete data functional
+- smoothing makes discrete data functional
+  - $y_i$ and $y_{i+1}$ are necessarily linked together; unlikely to be too different
+  - if the smoothness does not apply, it becomes multivariate data
+
+- By smooth, we can take m order derivatives for function $x$
+- $D^mx(t)$ refers to the derivative value at argument $t$
+
+- analysis of system's /dynamics/: the modelling of a system's rate of change
+
+- the actual observed data may bot at all be smooth due to so call noise or measurement error
+
+- noise:
+  - formless and predictable
+  - noise level is a tiny function of the size of the function at some cases, a.k.a. /signal-to-noise ratio/ is high
+
+*** Samples of functional data
+- /periodic boundary conditions/ are satisfied when time $t$ is considered cyclically
+- functional data are multidimensional, e.g. images
+
+*** The interplay between smooth and noisy variation
+*** The standard model for error and its limitations
+*** The resolving power of data
+*** Data resolution and derivative estimation
+** Representing functions by basis functions
+** The Fourier basis system for periodic data
+** The spline system for open-ended data
+*** Spline functions and degrees of freedom
+*** The B-spline basis for spline functions
+** Other useful basis system
+*** Wavelets
+*** Exponential and power bases
+*** Polynomial bases
+*** The polygonal basis
+*** The step-function basis
+*** The constant basis
+*** Empirical and designer bases
+** Choosing a scale for t
+** Further reading and notes
+
+   
