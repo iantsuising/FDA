@@ -2,7 +2,7 @@ library(fda)
 library(ggplot2)
 library(zoo)
 
-pdf("pic.in.ch3.pdf")
+#pdf("pic.in.ch3.pdf")
 ###handwriting
 
 dim(handwrit)
@@ -36,7 +36,11 @@ p3.2.y
 ##############3.3
 
 X <- (rowMeans(handwrit[,,1]))
+Y <- (rowMeans(handwrit[,,2]))
 
+plot(X,Y,)
+
+matplot(s)
 
 t <- coredata(handwritTime/1000)
 
@@ -124,4 +128,25 @@ title("smoothed Yscript fisrt dereiv")
 plot(y.fd.D2)
 title("smoothed Yscript second dereiv")
 
-dev.off()
+
+
+##### 3.6
+
+t <- refinery$Time
+breaks <- c(0,t[67]/2,t[67],t[67],seq(t[67],t[194],len=5))
+norder <- 4
+tray <- refinery$Tray47
+
+trayBasis <- create.bspline.basis(rangeval = c(0,193),norder=norder,breaks=breaks)
+
+trayfd <- smooth.basis(t,tray,trayBasis)$fd
+
+trayline <- eval.fd(t,trayfd)
+
+plot(t,tray, type="p",cex=0.2,axes=FALSE)
+lines(t,trayline)
+abline(v=breaks,lty=2)
+axis(1,at=seq(0,200,by=50))
+axis(2)
+
+#dev.off() 
