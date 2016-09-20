@@ -13,7 +13,7 @@ X=1000*handwrit[,1,1]
 Y=1000*handwrit[,1,2]
 p3.1 <- ggplot()+
     geom_path(aes(x=X,y=Y))+
-    labs(x="",y="")
+    labs(x="",y="")   
 p3.1
 
 p3.2.x <- ggplot()+
@@ -40,6 +40,7 @@ Y <- (rowMeans(handwrit[,,2]))
 
 plot(X,Y,)
 
+matplot(s)
 
 t <- coredata(handwritTime/1000)
 
@@ -62,14 +63,14 @@ p3.3.1 <- ggplot()+
 p3.3.1
 
 p3.3.2 <- ggplot()+
-    geom_smooth(aes(x=t[-c(1,1401)],y=x.D2),method="loess")+
+    geom_path(aes(x=t[-c(1,1401)],y=x.D2))+
     geom_hline(yintercept = 0, linetype="dashed")+
     labs(x="Time (Sce)", y= "X second difference/10000")
 
 
 p3.3.2
 
-plot(ksmooth(t[-c(1,1401)], x.D2,"normal",bandwidth=.075),type = "l")
+
 
 ##3.3 loop
 #pdf("deletedme.3.3.pdf")
@@ -148,4 +149,4 @@ abline(v=breaks,lty=2)
 axis(1,at=seq(0,200,by=50))
 axis(2)
 
-#dev.off()
+#dev.off() 

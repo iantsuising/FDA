@@ -1,0 +1,27 @@
+library(fda)
+library(zoo)
+
+data(package="fda")
+
+###Fig 4.1
+
+Mbasis <- create.fourier.basis(rangeval = c(1,365),nbasis=109)
+
+summer <- seq(150,250,1)
+winter <- seq(335,435,1)
+t <- seq(1,365,1)
+
+data <- colMeans(MontrealTemp)
+
+data <- as.numeric(c(data[150:365],data[1:149]))
+
+summerTemp <- data[1:101]
+winterTemp <- data[186:286]
+
+Tempfd <- smooth.basisPar(t,data, Mbasis)$fd
+
+Y <- eval.fd(summer,Tempfd)
+
+plot(summer,summerTemp)
+
+
